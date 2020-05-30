@@ -4,9 +4,12 @@ class OnboardingModel {
 
   OnboardingModel({this.image, this.text});
 
-  void setScreenData(String imagePath, String text) {
+  void setScreenImage(String imagePath) {
     image = imagePath;
-    text = text;
+  }
+
+  void setScreenText(String screenText) {
+    text = screenText;
   }
 
   String getScreenImage() {
@@ -22,13 +25,18 @@ List<OnboardingModel> getOnboardingScreen() {
   List<OnboardingModel> screens = new List<OnboardingModel>();
   OnboardingModel onboardingModel = new OnboardingModel();
 
-  onboardingModel.setScreenData('onboard1.png', 'Sign Up & Set Location');
+  onboardingModel.setScreenImage('images/onboard1.png');
+  onboardingModel.setScreenText('Sign Up & Set Location');
   screens.add(onboardingModel);
 
-  onboardingModel.setScreenData('onboard2.png', 'Make a request');
+  onboardingModel = new OnboardingModel();
+  onboardingModel.setScreenImage('images/onboard2.png');
+  onboardingModel.setScreenText('Make a request');
   screens.add(onboardingModel);
 
-  onboardingModel.setScreenData('onboard3.png', 'Safe delivery');
+  onboardingModel = new OnboardingModel();
+  onboardingModel.setScreenImage('images/onboard3.png');
+  onboardingModel.setScreenText('Safe delivery');
   screens.add(onboardingModel);
 
   return screens;
