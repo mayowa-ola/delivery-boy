@@ -1,7 +1,12 @@
 import 'package:deliveryboy/data/onboardingData.dart';
+import 'package:deliveryboy/screens/app_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
+import 'package:deliveryboy/screens/welcome_screen.dart';
+import 'package:deliveryboy/screens/login_screen.dart';
+import 'package:deliveryboy/screens/registration_screen.dart';
+import 'package:deliveryboy/screens/home_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,14 +15,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData.dark().copyWith(
+          primaryColor: Colors.yellow,
+//          fontFamily: 'Raleway',
+          scaffoldBackgroundColor: Colors.white),
       title: "Delivery Boy",
       home: Home(),
-      debugShowCheckedModeBanner: false,
+//      debugShowCheckedModeBanner: false,
+      initialRoute: Home.id,
+      routes: {
+        LoginScreen.id: (context) => LoginScreen(),
+        WelcomeScreen.id: (context) => WelcomeScreen(),
+        RegistrationScreen.id: (context) => RegistrationScreen(),
+        HomeScreen.id: (context) => HomeScreen(),
+        AppScreen.id: (context) => AppScreen(),
+        Home.id: (context) => Home()
+      },
     );
   }
 }
 
 class Home extends StatefulWidget {
+  static String id = 'home';
   @override
   _HomeState createState() => _HomeState();
 }
@@ -101,10 +120,15 @@ class _HomeState extends State<Home> {
                 width: MediaQuery.of(context).size.width,
                 height: Platform.isIOS ? 70 : 60,
                 color: Colors.yellow,
-                child: Text(
-                  "GET STARTED NOW",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w600),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, WelcomeScreen.id);
+                  },
+                  child: Text(
+                    "GET STARTED NOW",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w600),
+                  ),
                 ),
               ));
   }
@@ -125,7 +149,11 @@ class OnboardingScreen extends StatelessWidget {
           SizedBox(height: 20),
           Text(
             onboardingText,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            style: TextStyle(
+                fontSize: 45,
+                color: Colors.black54,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'Euphoria'),
           )
         ],
       ),
