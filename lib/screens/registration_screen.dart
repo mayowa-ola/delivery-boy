@@ -45,6 +45,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
               TextField(
                   textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black),
                   onChanged: (value) {
                     name = value;
                   },
@@ -56,6 +57,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               TextField(
                   keyboardType: TextInputType.emailAddress,
                   textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black),
                   onChanged: (value) {
                     email = value;
                   },
@@ -65,7 +67,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 8.0,
               ),
               TextField(
+                  obscureText: true,
                   textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black),
                   onChanged: (value) {
                     password = value;
                   },
@@ -77,6 +81,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               TextField(
                   obscureText: true,
                   textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black),
                   onChanged: (value) {
                     confirmPassword = value;
                   },
