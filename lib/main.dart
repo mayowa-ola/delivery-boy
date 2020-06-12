@@ -16,9 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
-          primaryColor: Colors.yellow,
-//          fontFamily: 'Raleway',
-          scaffoldBackgroundColor: Colors.white),
+          primaryColor: Colors.yellow, scaffoldBackgroundColor: Colors.white),
       title: "Delivery Boy",
       home: Home(),
 //      debugShowCheckedModeBanner: false,

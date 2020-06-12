@@ -36,3 +36,9 @@ const kTextFieldDecoration = InputDecoration(
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
   ),
 );
+
+const kTextFiledStyle = TextStyle(
+    color: Colors.black,
+    fontFamily: 'Raleway',
+    fontWeight: FontWeight.bold,
+    fontSize: 18);
