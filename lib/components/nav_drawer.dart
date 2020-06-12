@@ -13,10 +13,10 @@ class NavDrawer extends StatelessWidget {
           DrawerHeader(
             child: Text(
               'Menu',
-              style: TextStyle(color: Colors.white, fontSize: 25),
+              style: TextStyle(color: Colors.black, fontSize: 25),
             ),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Colors.yellow,
             ),
           ),
           ListTile(
@@ -31,7 +31,7 @@ class NavDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.border_color),
-            title: Text('Request'),
+            title: Text('Delivery Request'),
             onTap: () => {
               Navigator.push(
                 context,
