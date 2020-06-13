@@ -149,9 +149,9 @@ class OnboardingScreen extends StatelessWidget {
             onboardingText,
             style: TextStyle(
                 fontSize: 45,
-                color: Colors.black54,
+                color: Colors.yellow,
                 fontWeight: FontWeight.w700,
-                fontFamily: 'Euphoria'),
+                fontFamily: 'RaphLanokFuture'),
           )
         ],
       ),
