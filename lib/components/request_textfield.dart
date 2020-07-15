@@ -6,7 +6,8 @@ class RequestTextField extends StatelessWidget {
   final icon;
   final int length;
   final String hint;
-  RequestTextField({this.label, this.icon, this.length: 1, this.hint: ''});
+  final onChange;
+  RequestTextField({this.label, this.icon, this.length: 1, this.hint: '', this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class RequestTextField extends StatelessWidget {
             maxLines: length,
             textAlign: TextAlign.left,
             style: TextStyle(color: Colors.black),
-            onChanged: (value) {},
+            onChanged: onChange,
             decoration: kTextFieldDecoration.copyWith(
               hintText: hint,
               prefixIcon: Icon(

@@ -4,6 +4,7 @@ import 'package:deliveryboy/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:deliveryboy/screens/app_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static String id = 'registration_screen';
@@ -19,8 +20,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   String password;
   String email;
   String name;
+  String userId;
+  String contact;
+  String address;
   String confirmPassword;
   String errorMessage;
+  void storeUserDetails() async{
+    final FirebaseUser user = await _auth.currentUser();
+    Firestore.instance.collection('users').document(user.uid)
+        .setData({ 'name': name, 'email': email, 'contact': contact, 'address': address,  });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +66,29 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     name = value;
                   },
                   decoration: kTextFieldDecoration.copyWith(
-                      hintText: 'Enter your Name')),
+                      hintText: 'Enter your Full Name')),
+              SizedBox(
+                height: 8.0,
+              ),
+              TextField(
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black),
+                  onChanged: (value) {
+                    contact = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                      hintText: 'Enter your Phone Number')),
+              SizedBox(
+                height: 8.0,
+              ),
+              TextField(
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black),
+                  onChanged: (value) {
+                    address = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                      hintText: 'Enter your contact address')),
               SizedBox(
                 height: 8.0,
               ),
@@ -105,8 +136,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     showSpinner = true;
                   });
                   try {
-                    print(password);
-                    print(confirmPassword);
                     if(password != confirmPassword) {
                       setState(() {
                         error = true;
@@ -115,10 +144,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       });
                       return;
                     }
+
                     final newUser = await _auth.createUserWithEmailAndPassword(
                         email: email, password: password);
-//                    final newUser = await _auth.signInWithCredential(name:name, email: email, password: password)
                     if (newUser != null) {
+//                    setState(() {
+//                      userId = _auth.ge;
+//                    });
+                      storeUserDetails();
                       Navigator.pushNamed(context, AppScreen.id);
                     }
                     setState(() {

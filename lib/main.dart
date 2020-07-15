@@ -15,7 +15,15 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-
+    Future<bool> checkSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool seen = prefs.getBool('seen');
+    if(seen == null) {
+      prefs.setBool('seen', true);
+      return false;
+    }
+    return seen;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +31,19 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
           primaryColor: Colors.yellow, scaffoldBackgroundColor: Colors.white),
       title: "Delivery Boy",
-      home:  Home(),
+      home: FutureBuilder<bool>(
+          future: checkSeen(),
+          builder:(BuildContext context, AsyncSnapshot<bool> snapshot){
+            if (snapshot.data == false){
+              return Home();
+            }
+            else{
+              return WelcomeScreen();
+            }
+          }
+      ),
       debugShowCheckedModeBanner: false,
-      initialRoute: Home.id,
+//      initialRoute: getSeen() ? WelcomeScreen.id : Home.id,
       routes: {
         LoginScreen.id: (context) => LoginScreen(),
         WelcomeScreen.id: (context) => WelcomeScreen(),
