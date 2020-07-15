@@ -15,10 +15,12 @@ class RegistrationScreen extends StatefulWidget {
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
   bool showSpinner = false;
+  bool error = false;
   String password;
   String email;
   String name;
   String confirmPassword;
+  String errorMessage;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +45,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               SizedBox(
                 height: 48.0,
               ),
+              error ? Container(
+                padding: EdgeInsets.symmetric(vertical: 10.0),
+                child: Text(errorMessage, style: kTextFiledStyle,textAlign: TextAlign.center,),
+                decoration: BoxDecoration( color: Colors.redAccent,),
+              ) : Container(),
               TextField(
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.black),
@@ -98,6 +105,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     showSpinner = true;
                   });
                   try {
+                    print(password);
+                    print(confirmPassword);
+                    if(password != confirmPassword) {
+                      setState(() {
+                        error = true;
+                        errorMessage = 'Your password do not match';
+                        showSpinner = false;
+                      });
+                      return;
+                    }
                     final newUser = await _auth.createUserWithEmailAndPassword(
                         email: email, password: password);
 //                    final newUser = await _auth.signInWithCredential(name:name, email: email, password: password)
@@ -108,6 +125,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       showSpinner = false;
                     });
                   } catch (ex) {
+                    setState(() {
+                      if(ex.message == null) {
+                        errorMessage = 'Please enter email and password';
+                      }
+                      else errorMessage = ex.message;
+                      error = true;
+                      showSpinner = false;
+                    });
                     print(ex);
                   }
                 },

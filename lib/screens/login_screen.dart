@@ -14,9 +14,11 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
   bool showSpinner = false;
+  bool error = false;
   String user;
   String email;
   String password;
+  String errorMessage;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +42,14 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(
                 height: 48.0,
+              ),
+              error ? Container(
+                padding: EdgeInsets.symmetric(vertical: 10.0),
+                child: Text(errorMessage, style: kTextFiledStyle,textAlign: TextAlign.center,),
+                decoration: BoxDecoration( color: Colors.redAccent,),
+              ) : Container(),
+              SizedBox(
+                height: 20.0,
               ),
               TextField(
                   keyboardType: TextInputType.emailAddress,
@@ -82,7 +92,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       showSpinner = false;
                     });
                   } catch (ex) {
-                    print(ex);
+                    setState(() {
+                      if(ex.message == null) {
+                        errorMessage = 'Please enter email and password';
+                      }
+                      else errorMessage = ex.message;
+                      error = true;
+                      showSpinner = false;
+                    });
                   }
                 },
               )

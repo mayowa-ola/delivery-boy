@@ -26,7 +26,7 @@ List<OnboardingModel> getOnboardingScreen() {
   OnboardingModel onboardingModel = new OnboardingModel();
 
   onboardingModel.setScreenImage('images/onboard1.png');
-  onboardingModel.setScreenText('Sign Up & Set Location');
+  onboardingModel.setScreenText('Sign up');
   screens.add(onboardingModel);
 
   onboardingModel = new OnboardingModel();

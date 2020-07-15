@@ -7,19 +7,24 @@ import 'package:deliveryboy/screens/welcome_screen.dart';
 import 'package:deliveryboy/screens/login_screen.dart';
 import 'package:deliveryboy/screens/registration_screen.dart';
 import 'package:deliveryboy/screens/home_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:async';
+
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
           primaryColor: Colors.yellow, scaffoldBackgroundColor: Colors.white),
       title: "Delivery Boy",
-      home: Home(),
-//      debugShowCheckedModeBanner: false,
+      home:  Home(),
+      debugShowCheckedModeBanner: false,
       initialRoute: Home.id,
       routes: {
         LoginScreen.id: (context) => LoginScreen(),
@@ -46,7 +51,6 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     screen = getOnboardingScreen();
   }
@@ -151,7 +155,7 @@ class OnboardingScreen extends StatelessWidget {
                 fontSize: 45,
                 color: Colors.yellow,
                 fontWeight: FontWeight.w700,
-                fontFamily: 'RaphLanokFuture'),
+                fontFamily: 'Raleway'),
           )
         ],
       ),
